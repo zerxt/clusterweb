@@ -1,0 +1,27 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+  <h1 class="mb-4">Available Products</h1>
+
+  <div class="row">
+    {% for product in products %}
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="{{ product.productPhoto.url }}" class="card-img-top" alt="{{ product.productName }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.productName }}</h5>
+            <p class="card-text">Type: {{ product.productType }}</p>
+            <p class="card-text">Price: ${{ product.productPrice }}</p>
+            <p class="card-text">Weight: {{ product.productWeight }} kg</p>
+            <p class="card-text">Date Added: {{ product.date }}</p>
+            <a href="#" class="btn btn-primary">Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No products available.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
