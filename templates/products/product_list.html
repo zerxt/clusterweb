@@ -3,25 +3,37 @@
 {% block title %}Product List{% endblock %}
 
 {% block content %}
-  <h1 class="mb-4">Available Products</h1>
-
-  <div class="row">
+<h1 class="mb-4">Cluster web</h1>
+<div class="row">
     {% for product in products %}
-      <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4">
         <div class="card">
-          <img src="{{ product.productPhoto.url }}" class="card-img-top" alt="{{ product.productName }}">
-          <div class="card-body">
-            <h5 class="card-title">{{ product.productName }}</h5>
-            <p class="card-text">Type: {{ product.productType }}</p>
-            <p class="card-text">Price: ${{ product.productPrice }}</p>
-            <p class="card-text">Weight: {{ product.productWeight }} kg</p>
-            <p class="card-text">Date Added: {{ product.date }}</p>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
-          </div>
-        </div>
+  <div class="card-img-top" style="height: 200px; background-color: #f0f0f0;">
+    {% if product.product_photo %}
+      <img src="{{ product.product_photo.url }}" class="img-fluid" alt="{{ product.product_name }}" style="height: 100%; width: 100%; object-fit: cover;">
+    {% else %}
+      <!-- Placeholder for missing image with centered text -->
+      <div style="height: 100%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">
+        <span style="color: #888; text-align: center;">No Image</span>
       </div>
-    {% empty %}
-      <p>No products available.</p>
-    {% endfor %}
+    {% endif %}
   </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ product.product_name }}</h5>
+    <p class="card-text">Type: {{ product.product_type }}</p>
+    <p class="card-text">Price: ${{ product.product_price }}</p>
+    <p class="card-text">Weight: {{ product.product_weight }} kg</p>
+    <p class="card-text">Date Added: {{ product.date_added }}</p>
+    <a href="#" class="btn btn-primary">message</a>
+    <a href="#" class="btn btn-primary">save</a>
+    <a href="#" class="btn btn-primary">other</a>
+
+  </div>
+</div>
+
+    </div>
+    {% empty %}
+    <p>No products available.</p>
+    {% endfor %}
+</div>
 {% endblock %}
