@@ -1,0 +1,19 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<h1>Information Center</h1>
+<a href="{% url 'informations:create_information' %}" class="btn btn-primary">Post Information</a>
+
+<ul class="list-group mt-3">
+    {% for post in posts %}
+    <li class="list-group-item">
+        <h3>{{ post.subject }}</h3>
+        <p>{{ post.aspiration_message }}</p>
+        {% if post.photo %}
+        <img src="{{ post.photo.url }}" alt="Photo" class="img-fluid" />
+        {% endif %}
+        <small>Posted on {{ post.date_posted }}</small>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
