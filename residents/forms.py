@@ -3,12 +3,17 @@ from django.contrib.auth.models import User
 from .models import Resident
 
 class ResidentRegistrationForm(forms.ModelForm):
-    # Password confirmation fields
+    # Fields for the User model
     password1 = forms.CharField(widget=forms.PasswordInput, label='Password')
     password2 = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
 
+    # Fields for the Resident model
+    phone_number = forms.CharField(max_length=15, label='Phone Number')
+    address = forms.CharField(widget=forms.Textarea, label='Address')
+    status_ownership = forms.CharField(max_length=50, label='Status Ownership')
+
     class Meta:
-        model = User  # We'll create the User model first
+        model = User  # User model fields
         fields = ['username', 'email']
 
     def clean_password2(self):
@@ -27,17 +32,15 @@ class ResidentRegistrationForm(forms.ModelForm):
             user.save()
         
         # Create the Resident object
-        resident = Resident(
+        Resident.objects.create(
             user=user,
             phone_number=self.cleaned_data['phone_number'],
             address=self.cleaned_data['address'],
             status_ownership=self.cleaned_data['status_ownership']
         )
-        if commit:
-            resident.save()
         return user
 
-from django import forms
+
 
 class ResidentLoginForm(forms.Form):
     username = forms.CharField(max_length=100)

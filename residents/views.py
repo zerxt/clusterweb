@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import ResidentRegistrationForm
 from .forms import ResidentLoginForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
@@ -35,10 +34,14 @@ def login_resident(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "Logged in successfully!")
-                return redirect('informations:information_list')  # Redirect to the information list after login
+                return redirect('residents:dashboard')  # Redirect to the information list after login
             else:
                 form.add_error(None, 'Invalid username or password')
     else:
         form = ResidentLoginForm()
 
     return render(request, 'residents/login.html', {'form': form})
+
+def logout_resident(request):
+    logout(request)
+    return redirect('residents:login_resident') 
