@@ -133,3 +133,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # This setup is only for development purpose
+
+LOGIN_URL = 'residents:login'
+LOGIN_REDIRECT_URL = 'residents:dashboard'
+LOGOUT_REDIRECT_URL = 'residents:login'

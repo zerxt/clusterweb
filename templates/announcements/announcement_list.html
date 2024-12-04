@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Announcements</h1>
+
+    <a href="{% url 'announcements:create_announcement' %}">Create New Announcement</a>
+    
+    <ul>
+        {% for announcement in announcements %}
+            <li>
+                <h2>{{ announcement.announcementTitle }}</h2>
+                <p>{{ announcement.message }}</p>
+                <p><strong>Writer:</strong> {{ announcement.writer }}</p>
+                <p><strong>Date:</strong> {{ announcement.date }}</p>
+                {% if announcement.photo %}
+                    <img src="{{ announcement.photo.url }}" alt="Photo for {{ announcement.announcementTitle }}" style="max-width: 300px;">
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>No announcements available.</p>
+        {% endfor %}
+    </ul>
+{% endblock %}
