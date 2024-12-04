@@ -7,5 +7,6 @@ app_name = 'residents'
 urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='residents/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('dashboard/', views.dashboard, name='dashboard'),  # Example of a protected route
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('register/', views.register, name='register'),  
 ]
