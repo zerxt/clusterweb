@@ -3,7 +3,7 @@ from .models import Product
 from .forms import ProductForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from residents.models import Resident
 
 def product_list(request):
     # Fetch all products from the database

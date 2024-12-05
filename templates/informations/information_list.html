@@ -13,6 +13,7 @@
         <img src="{{ post.photo.url }}" alt="Photo" class="img-fluid" />
         {% endif %}
         <small>Posted on {{ post.date_posted }}</small>
+        <small>created by {{ post.added_by }}</small>
     </li>
     {% endfor %}
 </ul>
