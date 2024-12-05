@@ -4,6 +4,13 @@
 
 {% block content %}
 <h1 class="mb-4">Cluster web</h1>
+
+{% if user.is_authenticated %}
+<div class="mb-4 text-end">
+    <a href="{% url 'products:my_products' %}" class="btn btn-success">My Products</a>
+</div>
+{% endif %}
+
 <div class="row">
     {% for product in products %}
     <div class="col-md-4 mb-4">

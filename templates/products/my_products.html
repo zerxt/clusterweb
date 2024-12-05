@@ -1,0 +1,39 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">My Products</h1>
+
+    {% if products %}
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-img-top" style="height: 200px; background-color: #f0f0f0;">
+                    {% if product.product_photo %}
+                    <img src="{{ product.product_photo.url }}" class="img-fluid" alt="{{ product.product_name }}" style="height: 100%; width: 100%; object-fit: cover;">
+                    {% else %}
+                    <div style="height: 100%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">
+                        <span style="color: #888; text-align: center;">No Image</span>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.product_name }}</h5>
+                    <p class="card-text">Type: {{ product.product_type }}</p>
+                    <p class="card-text">Price: ${{ product.product_price }}</p>
+                    <p class="card-text">Weight: {{ product.product_weight }} kg</p>
+                    <a href="{% url 'products:edit_product' product.id %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'products:delete_product' product.id %}" class="btn btn-danger btn-sm">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="alert alert-warning">You haven't added any products yet.</p>
+    {% endif %}
+
+    <a href="{% url 'products:create_product' %}" class="btn btn-success mt-3">Add New Product</a>
+</div>
+{% endblock %}
