@@ -1,6 +1,5 @@
 """
 URL configuration for marketplace project.
-
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
 Examples:
@@ -14,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 # marketplace/urls.py
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,4 +26,5 @@ urlpatterns = [
     path('announcements/', include('announcements.urls')), 
     path('informations/', include('informations.urls')),  
     path('residents/', include('residents.urls')),
+    path('', include('home.urls')),  # Redirect root URL to your app
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

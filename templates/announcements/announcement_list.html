@@ -3,8 +3,6 @@
 {% block content %}
     <h1>Announcements</h1>
 
-    <a href="{% url 'announcements:create_announcement' %}">Create New Announcement</a>
-    
     <ul>
         {% for announcement in announcements %}
             <li>
