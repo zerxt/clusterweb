@@ -78,3 +78,10 @@ def delete_product(request, product_id):
     product.delete()
     messages.success(request, "Product deleted successfully!")
     return redirect('products:my_products')  # Redirect to the user's products page
+
+# products/views.py
+def product_chat(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'products/product_chat.html', {
+        'product': product
+    })

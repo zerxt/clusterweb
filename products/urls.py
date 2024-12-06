@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:product_id>/edit/', views.edit_product, name='edit_product'),
     path('delete/<int:product_id>/', views.delete_product, name='delete_product'),
     path('my_products/', views.my_products, name='my_products'),
+    path('<int:product_id>/chat/', views.product_chat, name='product_chat'),  # Chat page route
 ]

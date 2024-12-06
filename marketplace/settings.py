@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'announcements',
     'informations',
     'residents',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -76,6 +77,17 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'marketplace.wsgi.application'
+
+ASGI_APPLICATION = "marketplace.asgi.application"
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],  # Update if using a remote Redis server
+        },
+    },
+}
 
 
 # Database
