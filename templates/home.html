@@ -1,0 +1,36 @@
+{% extends 'base_generic.html' %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <!-- Welcome message -->
+        <h1>Welcome to Cluster Web</h1>
+        <p>Explore announcements, products, and more!</p>
+    </div>
+</section>
+
+<section class="container mt-5">
+    <h2>Latest Announcements</h2>
+    <div class="row">
+        {% for announcement in announcements %}
+        <div class="col-md-4 announcement">
+            <div class="card">
+                {% if announcement.photo %}
+                <img src="{{ announcement.photo.url }}" class="card-img-top" alt="{{ announcement.announcementTitle }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ announcement.announcementTitle }}</h5>
+                    <p class="card-text">{{ announcement.message|truncatechars:100 }}</p>
+                    <p class="text-muted">Written by {{ announcement.writer }} on {{ announcement.date|date:"F j, Y" }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No announcements available.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

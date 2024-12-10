@@ -20,7 +20,7 @@ def create_information(request):
                 information.added_by = Resident.objects.get(user=request.user)
                 information.save()
                 messages.success(request, "Information created successfully!")
-                return redirect('informations:information_list')
+                return redirect('informations:create_information.html')
             except Resident.DoesNotExist:
                 messages.error(request, "Current user is not associated with any resident account.")
                 return redirect('informations:create_information')

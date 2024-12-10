@@ -1,23 +1,29 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Announcements</h1>
+    <h1 class="mb-4">Announcements</h1>
 
-    <a href="{% url 'announcements:create_announcement' %}">Create New Announcement</a>
-    
-    <ul>
-        {% for announcement in announcements %}
-            <li>
-                <h2>{{ announcement.announcementTitle }}</h2>
-                <p>{{ announcement.message }}</p>
-                <p><strong>Writer:</strong> {{ announcement.writer }}</p>
-                <p><strong>Date:</strong> {{ announcement.date }}</p>
-                {% if announcement.photo %}
-                    <img src="{{ announcement.photo.url }}" alt="Photo for {{ announcement.announcementTitle }}" style="max-width: 300px;">
-                {% endif %}
-            </li>
-        {% empty %}
-            <p>No announcements available.</p>
-        {% endfor %}
-    </ul>
+    {% if announcements %}
+        <div class="row">
+            {% for announcement in announcements %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ announcement.announcementTitle }}</h5>
+                            <p class="card-text">{{ announcement.message }}</p>
+                            <p><strong>Writer:</strong> {{ announcement.writer }}</p>
+                            <p><strong>Date:</strong> {{ announcement.date }}</p>
+                            {% if announcement.photo %}
+                                <img src="{{ announcement.photo.url }}" alt="Photo for {{ announcement.announcementTitle }}" class="img-fluid" style="max-width: 100%; height: auto;">
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            No announcements available.
+        </div>
+    {% endif %}
 {% endblock %}

@@ -44,4 +44,4 @@ def login_resident(request):
 
 def logout_resident(request):
     logout(request)
-    return redirect('residents:login_resident') 
+    return redirect('residents:login') 

@@ -1,10 +1,28 @@
 {% extends 'base_generic.html' %}
 
 {% block content %}
-<h1>Create Information Post</h1>
-<form method="post" enctype="multipart/form-data">
+<div class="container mt-4">
+  <h1>Create Information Post</h1>
+
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
+    
+    <div class="mb-3">
+      <label for="id_subject" class="form-label">Subject</label>
+      <input type="text" name="subject" class="form-control" id="id_subject" value="{{ form.subject.value }}">
+    </div>
+    
+    <div class="mb-3">
+      <label for="id_aspiration_message" class="form-label">Aspiration Message</label>
+      <textarea name="aspiration_message" class="form-control" id="id_aspiration_message">{{ form.aspiration_message.value }}</textarea>
+    </div>
+    
+    <div class="mb-3">
+      <label for="id_photo" class="form-label">Upload Photo</label>
+      <input type="file" name="photo" class="form-control" id="id_photo">
+    </div>
+
     <button type="submit" class="btn btn-success">Submit</button>
-</form>
+  </form>
+</div>
 {% endblock %}
