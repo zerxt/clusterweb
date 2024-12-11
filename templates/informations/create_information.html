@@ -2,18 +2,18 @@
 
 {% block content %}
 <div class="container mt-4">
-  <h1>Create Information Post</h1>
+  <h1>Lapor</h1>
 
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     
     <div class="mb-3">
-      <label for="id_subject" class="form-label">Subject</label>
+      <label for="id_subject" class="form-label">Judul</label>
       <input type="text" name="subject" class="form-control" id="id_subject" value="{{ form.subject.value }}">
     </div>
     
     <div class="mb-3">
-      <label for="id_aspiration_message" class="form-label">Aspiration Message</label>
+      <label for="id_aspiration_message" class="form-label">Aspirasi</label>
       <textarea name="aspiration_message" class="form-control" id="id_aspiration_message">{{ form.aspiration_message.value }}</textarea>
     </div>
     

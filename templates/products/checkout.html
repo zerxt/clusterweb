@@ -1,0 +1,23 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Checkout</h2>
+    {% if cart and cart.items.exists %}
+    <div class="list-group mb-4">
+        {% for item in cart.items.all %}
+        <div class="list-group-item">
+            <h5>{{ item.product.product_name }}</h5>
+            <p><strong>Quantity:</strong> {{ item.quantity }}</p>
+            <p><strong>Total Price:</strong> ${{ item.total_price }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+    </form>
+    {% else %}
+    <p>Your cart is empty. Add items before checkout.</p>
+    {% endif %}
+</div>
+{% endblock %}

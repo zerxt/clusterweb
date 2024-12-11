@@ -1,19 +1,26 @@
 {% extends 'base_generic.html' %}
 
-{% block title %}Edit Product{% endblock %}
+{% block title %}Edit Produk{% endblock %}
 
 {% block content %}
+{% load static %}
+
 <!-- Hero Section -->
-<section class="hero">
-    <div class="container">
-        <!-- Welcome message -->
-        <h1>Welcome to Cluster Web</h1>
-        <p>Explore announcements, products, and more!</p>
+<section class="hero" style="background-image: url('{% static 'img/resident.png' %}'); background-size: cover; background-position: center; height: 400px; color: white; position: relative;">
+    <!-- Overlay Gelap -->
+    <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4);"></div>
+    
+    <div class="container d-flex align-items-center justify-content-center h-100 text-center position-relative">
+        <div class="hero-content">
+            <h1>Selamat datang di Sinar Bulan</h1>
+            <p>Jelajahi pengumuman, produk, dan lainnya!</p>
+            <a href="#announcements" class="btn btn-primary">Jelajahi Sekarang</a>
+        </div>
     </div>
 </section>
 
-<section class="container mt-5">
-    <h2>Latest Announcements</h2>
+<section class="container mt-5" id="announcements">
+    <h2>Pengumuman Terbaru</h2>
     <div class="row">
         {% for announcement in announcements %}
         <div class="col-md-4 announcement">
@@ -24,12 +31,12 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ announcement.announcementTitle }}</h5>
                     <p class="card-text">{{ announcement.message|truncatechars:100 }}</p>
-                    <p class="text-muted">Written by {{ announcement.writer }} on {{ announcement.date|date:"F j, Y" }}</p>
+                    <p class="text-muted">Ditulis oleh {{ announcement.writer }} pada {{ announcement.date|date:"F j, Y" }}</p>
                 </div>
             </div>
         </div>
         {% empty %}
-        <p>No announcements available.</p>
+        <p>Tidak ada pengumuman tersedia.</p>
         {% endfor %}
     </div>
 </section>
