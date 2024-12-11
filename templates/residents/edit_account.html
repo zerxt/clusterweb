@@ -1,0 +1,22 @@
+<!-- residents/edit_account.html -->
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Edit Account</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+
+        <!-- Display current profile picture -->
+        {% if user.resident.profile_picture %}
+            <div>
+                <h3>Current Profile Picture</h3>
+                <img src="{{ user.resident.profile_picture.url }}" alt="Profile Picture" style="max-width: 150px;"/>
+            </div>
+        {% endif %}
+
+        <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

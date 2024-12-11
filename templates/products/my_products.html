@@ -20,9 +20,9 @@
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{ product.product_name }}</h5>
-                    <p class="card-text">Type: {{ product.product_type }}</p>
-                    <p class="card-text">Price: ${{ product.product_price }}</p>
-                    <p class="card-text">Weight: {{ product.product_weight }} kg</p>
+                    <p class="card-text">Categori: {{ product.product_type }}</p>
+                    <p class="card-text">Harga: ${{ product.product_price }}</p>
+                    <p class="card-text">Berat: {{ product.product_weight }} kg</p>
                     <a href="{% url 'products:edit_product' product.id %}" class="btn btn-primary btn-sm">Edit</a>
                     <a href="{% url 'products:delete_product' product.id %}" class="btn btn-danger btn-sm">Delete</a>
                 </div>

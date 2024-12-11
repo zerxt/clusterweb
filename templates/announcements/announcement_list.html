@@ -1,23 +1,22 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1 class="mb-4">Announcements</h1>
+    <h1 class="mb-4">
+    </h1>
 
     {% if announcements %}
-        <div class="row">
+        <div class="container">
             {% for announcement in announcements %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ announcement.announcementTitle }}</h5>
-                            <p class="card-text">{{ announcement.message }}</p>
-                            <p><strong>Writer:</strong> {{ announcement.writer }}</p>
-                            <p><strong>Date:</strong> {{ announcement.date }}</p>
-                            {% if announcement.photo %}
-                                <img src="{{ announcement.photo.url }}" alt="Photo for {{ announcement.announcementTitle }}" class="img-fluid" style="max-width: 100%; height: auto;">
-                            {% endif %}
-                        </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ announcement.announcementTitle }}</h5>
+                        <p class="card-text">{{ announcement.message }}</p>
+                        <p><strong>Writer:</strong> {{ announcement.writer }}</p>
+                        <p><strong>Date:</strong> {{ announcement.date }}</p>
                     </div>
+                    {% if announcement.photo %}
+                        <img src="{{ announcement.photo.url }}" alt="Photo for {{ announcement.announcementTitle }}" class="card-img-bottom img-fluid" style="max-width: 100%; height: auto;">
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -27,3 +26,4 @@
         </div>
     {% endif %}
 {% endblock %}
+

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ResidentRegistrationForm
 from .forms import ResidentLoginForm
+from .forms import AccountEditForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -9,7 +10,6 @@ from django.shortcuts import render
 @login_required
 def dashboard(request):
     return render(request, 'residents/dashboard.html')
-
 
 def register(request):
     if request.method == 'POST':
@@ -45,3 +45,22 @@ def login_resident(request):
 def logout_resident(request):
     logout(request)
     return redirect('residents:login') 
+
+
+@login_required
+def edit_account(request):
+    user = request.user
+    resident = user.resident
+
+    if request.method == 'POST':
+        user_form = AccountEditForm(request.POST, request.FILES, instance=resident)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, "Your account details have been updated.")
+            return redirect('residents:edit')
+    else:
+        user_form = AccountEditForm(instance=resident)
+
+    return render(request, 'residents/edit_account.html', {
+        'user_form': user_form,
+    })

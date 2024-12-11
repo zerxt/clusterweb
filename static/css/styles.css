@@ -1,0 +1,23 @@
+body {
+  background-color: #fff; /* Default white background for the entire page */
+  color: #000; /* Default text color */
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar customization */
+.navbar {
+  background-color: #000; /* Black background for the navbar */
+  border-bottom: 2px solid #000; /* Optional: Adds a slight border for better contrast */
+}
+
+/* Footer customization */
+footer {
+  background-color: #000; /* Black background for the footer */
+  color: #fff; /* White text for the footer */
+}
+
+/* Add padding for the container to align properly */
+.container {
+  padding-top: 20px; /* Add spacing below navbar */
+}

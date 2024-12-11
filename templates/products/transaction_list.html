@@ -1,0 +1,87 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4">Daftar Transaksi</h2>
+
+    <h3>Pembelian</h3>
+    <table class="table table-striped mb-4">
+        <thead>
+            <tr>
+                <th scope="col"> </th>
+                <th scope="col">Barang</th>
+                <th scope="col">Gambar</th>
+                <th scope="col">Kuantitas</th>
+                <th scope="col">Total Harga</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Penjual</th>
+                <th scope="col">Metode Pembayaran</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in buyer_transactions %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ transaction.product.product_name }}</td>
+                <td>
+                    {% if transaction.product.product_photo %}
+                    <img src="{{ transaction.product.product_photo.url }}" alt="{{ transaction.product.product_name }}" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                    {% else %}
+                    <img src="https://via.placeholder.com/50" alt="Gambar Tidak Tersedia" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                    {% endif %}
+                </td>
+                <td>{{ transaction.quantity }}</td>
+                <td>Rp {{ transaction.total_price }}</td>
+                <td>{{ transaction.transaction_date }}</td>
+                <td>{{ transaction.seller }}</td>
+                <td>{{ transaction.get_payment_method_display }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">Tidak ada pembelian yang ditemukan.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Penjualan</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"> </th>
+                <th scope="col">Barang</th>
+                <th scope="col">Gambar</th>
+                <th scope="col">Kuantitas</th>
+                <th scope="col">Total Harga</th>
+                <th scope="col">Tanggal</th>
+                <th scope="col">Pembeli</th>
+                <th scope="col">Metode Pembayaran</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in seller_transactions %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>{{ transaction.product.product_name }}</td>
+                <td>
+                    {% if transaction.product.product_photo %}
+                    <img src="{{ transaction.product.product_photo.url }}" alt="{{ transaction.product.product_name }}" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                    {% else %}
+                    <img src="https://via.placeholder.com/50" alt="Gambar Tidak Tersedia" class="img-fluid rounded" style="width: 50px; height: 50px; object-fit: cover;">
+                    {% endif %}
+                </td>
+                <td>{{ transaction.quantity }}</td>
+                <td>Rp {{ transaction.total_price }}</td>
+                <td>{{ transaction.transaction_date }}</td>
+                <td>{{ transaction.buyer }}</td>
+                <td>{{ transaction.get_payment_method_display }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">Tidak ada penjualan yang ditemukan.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

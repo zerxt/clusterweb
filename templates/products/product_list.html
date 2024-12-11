@@ -1,15 +1,31 @@
 {% extends 'base_generic.html' %}
 
-{% block title %}Product List{% endblock %}
+{% block title %}Daftar Produk{% endblock %}
 
 {% block content %}
-<h1 class="mb-4">Cluster Web</h1>
+<div class="row mb-4">
+    <!-- Kiri: Pencarian -->
+    <div class="col-md-5">
+        <form method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Cari produk..." name="search"
+                    value="{{ search_query }}">
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </div>
+        </form>
+    </div>
 
-{% if user.is_authenticated %}
-<div class="mb-4 text-end">
-    <a href="{% url 'products:my_products' %}" class="btn btn-success">My Products</a>
+    <!-- Kanan: Produk Saya dan Keranjang -->
+    <div class="col-md-7 text-end">
+        {% if user.is_authenticated %}
+        <a href="{% url 'products:my_products' %}" class="btn btn-success me-3">Produk Saya</a>
+        <a href="{% url 'products:cart_detail' %}" class="btn btn-warning me-3">
+            Keranjang <span class="badge bg-light text-dark">{{ request.user.cart.products.count }}</span>
+        </a>
+        <a href="{% url 'products:transaction_list' %}" class="btn btn-secondary">Transaksi</a>
+        {% endif %}
+    </div>
 </div>
-{% endif %}
 
 <div class="row">
     {% for product in products %}
@@ -17,29 +33,36 @@
         <div class="card">
             <div class="card-img-top" style="height: 200px; background-color: #f0f0f0;">
                 {% if product.product_photo %}
-                    <img src="{{ product.product_photo.url }}" class="img-fluid" alt="{{ product.product_name }}" style="height: 100%; width: 100%; object-fit: cover;">
+                <img src="{{ product.product_photo.url }}" class="img-fluid" alt="{{ product.product_name }}"
+                    style="height: 100%; width: 100%; object-fit: cover;">
                 {% else %}
-                    <div style="height: 100%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">
-                        <span style="color: #888; text-align: center;">No Image</span>
-                    </div>
+                <div
+                    style="height: 100%; background-color: #e0e0e0; display: flex; justify-content: center; align-items: center;">
+                    <span style="color: #888; text-align: center;">Tidak Ada Gambar</span>
+                </div>
                 {% endif %}
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ product.product_name }}</h5>
-                <p class="card-text">Type: {{ product.product_type }}</p>
-                <p class="card-text">Price: Rp. {{ product.product_price }}</p>
-                <p class="card-text">Weight: {{ product.product_weight }} kg</p>
-                <p class="card-text">Date Added: {{ product.date_added }}</p>
+                <p class="card-text">Kategori: {{ product.product_type }}</p>
+                <p class="card-text">Harga: Rp {{ product.product_price }}</p>
+                <p class="card-text">Berat: {{ product.product_weight }} kg</p>
+                <p class="card-text">Tanggal: {{ product.date_added }}</p>
 
-                <!-- Link to the message system -->
-                <a href="{% url 'products:product_chat' product.id %}" class="btn btn-primary">Contact</a>
+                <!-- Tombol Beli -->
+                <a href="{% url 'products:buy_product' product.id %}" class="btn btn-success">Beli</a>
 
-                <!-- Add other buttons -->
+                <!-- Tombol Tambah/Hapus ke Keranjang -->
+                {% if product in request.user.cart.products.all %}
+                <a href="{% url 'products:remove_from_cart' product.id %}" class="btn btn-danger">Hapus dari Keranjang</a>
+                {% else %}
+                <a href="{% url 'products:add_to_cart' product.id %}" class="btn btn-primary">Simpan</a>
+                {% endif %}
             </div>
         </div>
     </div>
     {% empty %}
-    <p>No products available.</p>
+    <p>Tidak ada produk tersedia.</p>
     {% endfor %}
 </div>
 {% endblock %}
